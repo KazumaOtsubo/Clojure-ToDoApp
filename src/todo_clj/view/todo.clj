@@ -33,6 +33,8 @@
           (when-let [{:keys [msg]} (:flash req)]
             [:div.alert.alert-success [:strong msg]])
           [:h2 (:title todo)]
+          [:a.wide-link {:href (str "/todo")} "一覧へ"]
+          [:br]
           [:a.wide-link {:href (str "/todo/" todo-id "/edit")} "修正する"]
           [:a.wide-link {:href (str "/todo/" todo-id "/delete")} "削除する"]]
          (layout/common req))))
@@ -42,9 +44,11 @@
         (when-let [{:keys [msg]} (:flash req)]
           [:div.alert.alert-success [:strong msg]])
         [:h2 "TODO 一覧"]
+        [:a.wide-link {:href (str "/todo/new")} "追加する"]
         [:ul
          (for [{:keys [id title]} todo-list]
-           [:li [:a {:href (str "/todo/" id)} title]])]]
+           [:li [:a {:href (str "/todo/" id)} title]])]
+        [:a.wide-link {:href (str "/")} "ホームへ"]]
        (layout/common req)))
 
 (defn todo-edit-view [req todo]
